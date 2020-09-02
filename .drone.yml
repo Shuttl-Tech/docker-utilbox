@@ -1,0 +1,17 @@
+---
+kind: pipeline
+name: Default
+
+
+steps:
+  - name: Publish
+    image: plugins/ecr
+    settings:
+      dockerfile: Dockerfile
+      region: ap-south-1
+      repo: docker-utilbox
+      tags:
+        - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+        - push
